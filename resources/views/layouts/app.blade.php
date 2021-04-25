@@ -39,6 +39,22 @@
 
         <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+                @if($errors->any())
+                <div class="alert alert-danger">
+                    @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </div>
+                @endif
+
+                @if(session('success'))
+                <div class="alert alert-success">
+                <i class="fa fa-check"></i>
+                {{session('success')}}
+                </div>
+                @endif
+
                 {{ $slot }}
 
             </div>
@@ -49,9 +65,9 @@
     </div>
 
     @stack('modals')
-    @isset($js)
-    {{ $js }}
-    @endif
+        @isset($js)
+        {{ $js }}
+        @endif
     @livewireScripts
 </body>
 
