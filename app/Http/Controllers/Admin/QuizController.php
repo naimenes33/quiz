@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
 use App\Http\Requests\QuizcreateRequest;
+use App\Http\Requests\QuizUpdateRequest;
 
 class QuizController extends Controller
 {
@@ -50,7 +51,7 @@ class QuizController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -61,7 +62,8 @@ class QuizController extends Controller
      */
     public function edit($id)
     {
-        //
+        $quiz= Quiz::find($id) ?? abort(404,'quiz bulunamadı');
+        return view('admin.quiz.edit',compact('quiz'));
     }
 
     /**
@@ -71,9 +73,11 @@ class QuizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(QuizUpdateRequest $request, $id)
     {
-        //
+        $qui = Quiz::find($id) ?? abort(404,'Quiz bulunamadı');
+        Quiz::where('id','=',$id)->update($request->except(['_method','_token']));
+        return redirect()->route('quizzes.index')->withSuccess('Quiz güncelleme işlemi başarıyla gerçekleşti');
     }
 
     /**
