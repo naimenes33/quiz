@@ -13,6 +13,6 @@ class QuestionSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Question::factory(5)->create();
+        \App\Models\Question::factory(30)->create();
     }
 }
