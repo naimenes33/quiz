@@ -44,8 +44,8 @@ class QuestionController extends Controller
     public function store(QuestionCreateRequest $request,$id)
     {
         if($request->hasFile('image')){
-            $fileName = Str::slug($request->questions).'.'.$request->image->extension();
-            $fileNameWithUpload = 'uploads'.$fileName;
+            $fileName = Str::slug($request->questions).'.'.$request->image->getClientOriginalextension();
+            $fileNameWithUpload = 'uploads/'.$fileName;
             $request->image->move(public_path('uploads'),$fileName);
             $request->merge([
 
@@ -53,7 +53,7 @@ class QuestionController extends Controller
             ]);
         }
 
-          Quiz::find($id)->questions()->create($request->post());
+          Quiz::find($id)->questions()->create($request->all());
          return redirect()->route('questions.index',$id)->withSuccess('Soru başarıyla oluşturuldu');
     }
 
@@ -91,7 +91,7 @@ class QuestionController extends Controller
     {
         if($request->hasFile('image')){
             $fileName = Str::slug($request->questions).'.'.$request->image->extension();
-            $fileNameWithUpload = 'uploads'.$fileName;
+            $fileNameWithUpload = 'uploads/'.$fileName;
             $request->image->move(public_path('uploads'),$fileName);
             $request->merge([
 
