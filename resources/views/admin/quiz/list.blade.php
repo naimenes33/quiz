@@ -40,7 +40,7 @@
                         <th scope="col">Soru sayısı</th>
                         <th scope="col">Durum</th>
                         <th scope="col">Bitiş tarihi</th>
-                        <th scope="col">İşlemler</th>
+                        <th style="width: 150px;" scope="col">İşlemler</th>
                     </tr>
                 </thead>
                 <tbody>
