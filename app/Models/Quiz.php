@@ -18,7 +18,10 @@ class Quiz extends Model
     protected $dates=['finished_at'];
     protected $appends = ['details'];
 
-    
+    public function topTen(){
+        return $this->results()->orderByDesc('point')->take(10);
+    }
+
     public function getDetailsAttribute(){
         if($this->results()->count()>0){
         return [
