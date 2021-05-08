@@ -3,6 +3,8 @@
     <div class="card">
         <div class="card-body">
 
+        <h3>puan : <strong>{{$quiz->my_result->point}}</strong></h3>
+
         <div class="alert bg-light">
         <i class="fa fa-check text-success">doğru cevap</i> <br>
         <i class="fa fa-times text-danger">yanlış cevap</i> <br>
@@ -24,7 +26,8 @@
             <img src="{{asset($question->image)}}" alt="img-responsive">
 
             @endif
-
+            <br>
+            <small>bu soruya <strong>%{{$question->true_percent}}</strong> oranında cevap verildi</small>
 
 
             <div class="form-check mt-2">
