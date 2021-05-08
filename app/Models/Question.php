@@ -9,4 +9,8 @@ class Question extends Model
 {
     use HasFactory;
     protected $guarded=[];
+
+    public function my_answer(){
+        return $this->hasOne('App\Models\Answer')->where('user_id',auth()->user()->id);
+    }
 }
