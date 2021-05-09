@@ -11,9 +11,13 @@ use Illuminate\Support\Facades\Auth;
 class MainController extends Controller
 {
     public function dashboard(){
-      $quizzes = Quiz::where('status','publish')->withCount('questions')->paginate(5);
+      $quizzes = Quiz::where('status','publish')->where(function($jquery){
+        $jquery->whereNull('finished_at')->orWhere('finished_at','>',now());
 
-        return view('dashboard',compact('quizzes'));
+      })->withCount('questions')->paginate(5);
+       $results = auth()->user()->results;
+
+        return view('dashboard',compact('quizzes','results'));
     }
     
     public function quiz_detail($slug){
